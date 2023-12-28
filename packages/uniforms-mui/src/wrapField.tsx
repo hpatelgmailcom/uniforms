@@ -15,11 +15,12 @@ export default function wrapField(
     required,
     showInlineError,
     variant,
+    props,
   }: any,
   ...children: ReactNode[]
 ) {
   const formHelperText = showInlineError && error ? errorMessage : helperText;
-  const props = {
+  const elProps = {
     component,
     disabled: !!disabled,
     error: !!error,
@@ -28,11 +29,12 @@ export default function wrapField(
     readOnly,
     required,
     variant,
+    ...props,
   };
 
   return createElement(
     FormControl,
-    props,
+    elProps,
     ...children,
     !!formHelperText && <FormHelperText>{formHelperText}</FormHelperText>,
   );
