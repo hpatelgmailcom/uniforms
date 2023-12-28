@@ -20,6 +20,7 @@ function SubmitField({
 
   return (
     <Button
+      id="submit-button"
       disabled={disabled === undefined ? !!(error || state.disabled) : disabled}
       ref={inputRef}
       type="submit"
