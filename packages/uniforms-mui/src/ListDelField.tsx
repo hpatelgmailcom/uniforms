@@ -38,7 +38,7 @@ function ListDel({
   const domProps = {
     ...filterDOMProps(props),
     'data-testid': name,
-    disabled: !limitNotReached, 
+    disabled: !limitNotReached,
   };
   return (
     <IconButton
