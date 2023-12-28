@@ -27,7 +27,7 @@ export default function wrapField(
     fullWidth: !!fullWidth,
     margin,
     readOnly,
-    required,
+    required: !!required,
     variant,
     ...props,
   };
