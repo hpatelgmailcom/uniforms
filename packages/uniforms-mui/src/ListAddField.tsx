@@ -16,6 +16,7 @@ export type ListAddFieldProps = FieldProps<
   {
     fullWidth?: FormControlProps['fullWidth'];
     icon?: ReactNode;
+    initialCount?: number;
     margin?: FormControlProps['margin'];
     variant?: FormControlProps['variant'];
   }
@@ -25,6 +26,7 @@ function ListAdd({
   disabled,
   fullWidth = true,
   icon = '+',
+  initialCount,
   margin = 'dense',
   name,
   readOnly,
@@ -34,11 +36,10 @@ function ListAdd({
 }: ListAddFieldProps) {
   const nameParts = joinName(null, name);
   const parentName = joinName(nameParts.slice(0, -1));
-  const parent = useField<{ maxCount?: number }, unknown[]>(
-    parentName,
-    {},
-    { absoluteName: true },
-  )[0];
+  const parent = useField<
+    { initialCount?: number; maxCount?: number },
+    unknown[]
+  >(parentName, { initialCount }, { absoluteName: true })[0];
 
   const limitNotReached =
     !disabled && !(parent.maxCount! <= parent.value!.length);

@@ -14,17 +14,19 @@ import ListItemField from './ListItemField';
 export type ListFieldProps = FieldProps<
   unknown[],
   ListProps,
-  { addIcon?: ReactNode; itemProps?: object }
+  { addIcon?: ReactNode; initialCount?: number; itemProps?: object }
 >;
 
 function List({
   addIcon,
   children = <ListItemField name="$" />,
+  initialCount,
   itemProps,
   label,
   value,
   ...props
 }: ListFieldProps) {
+  const listAddFieldId = `${props.name}-button`;
   return (
     <>
       <ListMaterial
@@ -48,7 +50,12 @@ function List({
           ),
         )}
       </ListMaterial>
-      <ListAddField icon={addIcon} name="$" />
+      <ListAddField
+        id={listAddFieldId}
+        icon={addIcon}
+        name="$"
+        initialCount={initialCount}
+      />
     </>
   );
 }
