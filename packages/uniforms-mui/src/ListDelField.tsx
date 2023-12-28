@@ -30,16 +30,26 @@ function ListDel({
     { absoluteName: true },
   )[0];
 
-  disabled ||= readOnly || parent.minCount! >= parent.value!.length;
+  // disabled ||= readOnly || parent.minCount! >= parent.value!.length;
+  const minCount = parent?.minCount || 0;
+  const valueLength = parent?.value?.length || 0;
+  const limitNotReached = !disabled && !(minCount >= valueLength);
 
+  const domProps = {
+    ...filterDOMProps(props),
+    'data-testid': name,
+    disabled: !limitNotReached, 
+  };
   return (
     <IconButton
-      {...filterDOMProps(props)}
+      {...domProps}
       disabled={disabled}
       onClick={() => {
-        const value = parent.value!.slice();
-        value.splice(nameIndex, 1);
-        parent.onChange(value);
+        if (!readOnly) {
+          const value = parent.value!.slice();
+          value.splice(nameIndex, 1);
+          parent.onChange(value);
+        }
       }}
       size="large"
     >
