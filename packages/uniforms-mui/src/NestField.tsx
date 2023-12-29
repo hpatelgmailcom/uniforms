@@ -9,7 +9,13 @@ import wrapField from './wrapField';
 export type NestFieldProps = HTMLFieldProps<
   object,
   HTMLDivElement,
-  { helperText?: string; itemProps?: object; fullWidth?: boolean; margin?: any }
+  {
+    helperText?: string;
+    itemProps?: object;
+    fullWidth?: boolean;
+    margin?: any;
+    fromlist?: boolean;
+  }
 >;
 
 function Nest({
@@ -19,8 +25,13 @@ function Nest({
   itemProps,
   label,
   margin = 'dense',
+  fromlist = false,
   ...props
 }: NestFieldProps) {
+  // we are adding fromlist so NetField know it's an array item
+  // it is processing. We need to send the flag so NestField
+  // does not print item index number in the array for each row.
+  const validLabel = !fromlist ? label : undefined;
   return wrapField(
     {
       fullWidth,
@@ -28,7 +39,7 @@ function Nest({
       ...props,
       component: undefined,
     },
-    label && <FormLabel component="legend">{label}</FormLabel>,
+    validLabel && <FormLabel component="legend">{validLabel}</FormLabel>,
     children ||
       fields.map(field => (
         <AutoField key={field} name={field} {...itemProps} />

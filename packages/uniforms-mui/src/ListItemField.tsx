@@ -12,17 +12,23 @@ export type ListItemFieldProps = {
   divider?: ListItemProps['divider'];
   removeIcon?: ReactNode;
   value?: unknown;
+  style?: object;
 };
 
 function ListItem({
-  children = <AutoField label={null} name="" />,
+  // we are adding fromlist so NetField know it's an array item
+  // it is processing. We need to send the flag so NestField
+  // does not print item index number in the array for each row.
+  children = <AutoField fromlist label={null} name="" />,
   dense = true,
   disableGutters,
   divider,
   removeIcon,
+  style,
 }: ListItemFieldProps) {
   return (
     <ListItemMaterial
+      style={style}
       dense={dense}
       disableGutters={disableGutters}
       divider={divider}
