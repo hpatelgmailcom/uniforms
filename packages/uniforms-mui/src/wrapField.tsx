@@ -24,6 +24,7 @@ export default function wrapField(
     component,
     disabled: !!disabled,
     error: !!error,
+    errorMessage,
     fullWidth: !!fullWidth,
     margin,
     readOnly,

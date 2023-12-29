@@ -26,6 +26,7 @@ function Nest({
   label,
   margin = 'dense',
   fromlist = false,
+  error,
   ...props
 }: NestFieldProps) {
   // we are adding fromlist so NetField know it's an array item
@@ -42,7 +43,7 @@ function Nest({
     validLabel && <FormLabel component="legend">{validLabel}</FormLabel>,
     children ||
       fields.map(field => (
-        <AutoField key={field} name={field} {...itemProps} />
+        <AutoField error={!!error} key={field} name={field} {...itemProps} />
       )),
   );
 }
